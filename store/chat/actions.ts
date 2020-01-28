@@ -1,5 +1,5 @@
 import { ActionTree } from "vuex";
-import { firestoreAction, firebaseAction } from 'vuexfire'
+import { firestoreAction, firebaseAction,  } from 'vuexfire'
 import RootState from "@/model/root";
 import { ChatState, ChatMessage  } from "@/model/chat";
 
@@ -7,19 +7,25 @@ const actions: ActionTree<ChatState, RootState> = {
 
 
   setFixedData({ commit }, roomName?: string) {
-    const message: ChatMessage[] = [{userid: 'aa', message: 'cc'}, {userid: 'aa', message: 'cc'} ];
+    const message: ChatMessage[] = [{userid: 'aa', message: 'cc', id: "ssss"}, {userid: 'aa', message: 'cc', id: "ssffss"} ];
     console.log("setFixedData");
     commit("setMessages", message);
   },
 
-  setItemsRef: firebaseAction((context, payload) => {
-    context.bindFirebaseRef("messages", payload.ref, payload.options)
+  setItemsRef: firestoreAction((context, payload) => {
+
+    const serialize = (snapshot: firebase.firestore.DocumentSnapshot ) => {
+      return Object.defineProperty(snapshot.data(), 'id', { value: snapshot.id })
+    }
+
+    context.bindFirestoreRef("messages", payload.collection, {serialize })
+    // context.bindFirestoreRef("messages", payload.collection)
     console.log('binding done');
   }),
 
 
-  unSetItemsRef: firebaseAction((context, payload) => {
-    context.unbindFirebaseRef("messages");
+  unSetItemsRef: firestoreAction((context, payload) => {
+    context.unbindFirestoreRef("messages");
     console.log('unbinding done');
   }),
 
@@ -31,11 +37,11 @@ const actions: ActionTree<ChatState, RootState> = {
 
 
   adddDataServer( { commit }, payload){
-    const ref = payload.ref;
+    const collection = payload.collection;
     const message = payload.message;
 
-    const newChat = ref.push()
-    newChat.set(message).then(() => {
+   collection.add(message)
+    .then(() => {
       console.log('message set')
     })
 

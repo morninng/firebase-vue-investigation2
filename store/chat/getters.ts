@@ -7,16 +7,21 @@ export const getters: GetterTree<ChatState, RootState> = {
 
   messagesObj: (state): any => {
 
-    const updated_message = JSON.parse(JSON.stringify(state.messages));
+    const messages: any[] = []
 
+    state.messages.forEach((data: ChatMessage)=>{
+
+      const date: firebase.firestore.Timestamp = data.date as firebase.firestore.Timestamp;
+      messages.push({
+        id: data.id,
+        message: data.message,
+        userid: data.userid,
+        seconds: data.date ? date.seconds : null,
+        date: data.date ? new Date(date.seconds * 1000 + date.nanoseconds / 1000000 ) : '',
+      })
+    })
     console.log('message obj calculated')
-
-    return {obj: updated_message.map((data: Object)=>{
-
-      return Object.assign(data, {time: new Date()});
-
-    })}
-
+    return {obj: messages };
   },
   roomName: (state): string => state.roomName || '',
 };

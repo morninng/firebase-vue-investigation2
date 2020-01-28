@@ -19,10 +19,10 @@ const config = {
 
 firebase.initializeApp(config);
 
-const db = firebase.database();
+const db = firebase.firestore();
 
 export const FIREBASE_REF_ROOMNAME = 'h2-chat'
-export const dbChatRef = db.ref(FIREBASE_REF_ROOMNAME);
+export const dbChatCollection = db.collection(FIREBASE_REF_ROOMNAME);
 
 
 export default firebase;

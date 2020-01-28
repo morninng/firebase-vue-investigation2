@@ -21,7 +21,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { Getter, Action } from 'vuex-class'
 import { ChatMessage } from '@/model/chat'
-import { dbChatRef } from '@/plugins/firebase2'
+import { dbChatCollection } from '@/plugins/firebase2'
 
 @Component({
   components: {}
@@ -44,7 +44,7 @@ export default class Index extends Vue {
 
   switchToSubscribeServerData() {
     this.setItemsRefChat({
-      ref: dbChatRef
+      collection: dbChatCollection.orderBy('date')
     })
   }
 
@@ -55,17 +55,23 @@ export default class Index extends Vue {
   }
 
   addChatServer() {
-    const message: ChatMessage = { userid: 'server', message: 'server data' }
-    const newChat = dbChatRef.push()
-    newChat.set(message).then(() => {
-      console.log('message set')
-    })
+    const message: ChatMessage = {
+      userid: 'server',
+      message: 'server data',
+      date: new Date()
+    }
+
+    dbChatCollection.add(message)
   }
 
   adddDataServerChatButton() {
-    const message: ChatMessage = { userid: 'server2', message: 'server data2' }
+    const message: ChatMessage = {
+      userid: 'server2',
+      message: 'server data2',
+      date: new Date()
+    }
     this.adddDataServerChat({
-      ref: dbChatRef,
+      collection: dbChatCollection,
       message
     })
   }
@@ -73,7 +79,8 @@ export default class Index extends Vue {
   addChatLocal() {
     const message: ChatMessage = {
       userid: 'local added',
-      message: 'local added datat'
+      message: 'local added datat',
+      id: 'ssss'
     }
     this.addFixedDataLocalChat(message)
   }
