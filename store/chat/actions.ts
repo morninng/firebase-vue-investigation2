@@ -19,7 +19,6 @@ const actions: ActionTree<ChatState, RootState> = {
     }
 
     context.bindFirestoreRef("messages", payload.collection, {serialize })
-    // context.bindFirestoreRef("messages", payload.collection)
     console.log('binding done');
   }),
 

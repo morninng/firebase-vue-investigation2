@@ -3,7 +3,7 @@
     <span>second</span>
     <div>messagesChat -- {{ messagesChat }}</div>
     <div>------------</div>
-    <div>messagesObjChat -- {{ messagesObjChat }}</div>
+    <div>messagesObjChat -- {{ messagesObjChatFunc() }}</div>
     <br />
     <button @click="addChatServer()">addChatServer</button>
     <button @click="addChatLocal()">addChatLocal</button>
@@ -40,6 +40,23 @@ export default class Index extends Vue {
   mounted() {
     console.log('sedond mounted')
     this.setFixedDataChat()
+  }
+
+  messagesObjChatFunc() {
+    setTimeout(() => {
+      if (
+        this.messagesObjChat &&
+        this.messagesObjChat.arr &&
+        this.messagesObjChat.arr.length > 0
+      ) {
+        const lastChat = this.messagesObjChat.arr[
+          this.messagesObjChat.arr.length - 1
+        ]
+        console.log('----------------', lastChat.id)
+      }
+    }, 300)
+
+    return this.messagesObjChat
   }
 
   switchToSubscribeServerData() {

@@ -21,7 +21,7 @@ export const getters: GetterTree<ChatState, RootState> = {
       })
     })
     console.log('message obj calculated')
-    return {obj: messages };
+    return {arr: messages };
   },
   roomName: (state): string => state.roomName || '',
 };
