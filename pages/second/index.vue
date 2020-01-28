@@ -19,7 +19,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { Getter, Action } from 'vuex-class'
 import { ChatMessage } from '@/model/chat'
-import { dbChatRef } from '@/plugins/firebase'
+import { dbChatRef } from '@/plugins/firebase2'
 
 @Component({
   components: {}
