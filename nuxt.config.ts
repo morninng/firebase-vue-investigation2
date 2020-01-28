@@ -1,5 +1,11 @@
+
+const environment = process.env.NODE_ENV || 'development';
+const envSet = require(`./env/${environment}.ts`);
+
+
 export default {
   mode: 'spa',
+  env: envSet,
   /*
    ** Headers of the page
    */
