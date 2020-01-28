@@ -9,7 +9,8 @@ export const name = "customer";
 
 const state = (): ChatState => ({
   roomName: 'initial room',
-  messages: []
+  messages: [],
+  messagesObj: {},
 });
 
 

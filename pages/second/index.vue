@@ -1,7 +1,9 @@
 <template>
   <div class="container">
     <span>second</span>
-    <div>{{ messagesChat }}</div>
+    <div>messagesChat -- {{ messagesChat }}</div>
+    <div>------------</div>
+    <div>messagesObjChat -- {{ messagesObjChat }}</div>
     <br />
     <button @click="addChatServer()">addChatServer</button>
     <button @click="addChatLocal()">addChatLocal</button>
@@ -26,6 +28,7 @@ import { dbChatRef } from '@/plugins/firebase2'
 })
 export default class Index extends Vue {
   @Getter('messages', { namespace: 'chat' }) messagesChat!: ChatMessage[]
+  @Getter('messagesObj', { namespace: 'chat' }) messagesObjChat!: any
   @Action('setFixedData', { namespace: 'chat' }) setFixedDataChat!: Function
   @Action('addFixedDataLocal', { namespace: 'chat' })
   addFixedDataLocalChat!: Function

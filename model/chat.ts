@@ -5,4 +5,5 @@ export interface ChatMessage {
 export interface ChatState {
   roomName: string;
   messages: ChatMessage[];
+  messagesObj: any;
 }
