@@ -9,10 +9,7 @@ export const name = "customer";
 
 const state = (): ChatState => ({
   roomName: 'initial room',
-  messages: [{
-    userid: 'aa',
-    message: 'bb'
-  }]
+  messages: []
 });
 
 

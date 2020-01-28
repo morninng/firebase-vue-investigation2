@@ -3,6 +3,6 @@ export interface ChatMessage {
   message: string;
 }
 export interface ChatState {
-  roomName: string | null;
+  roomName: string;
   messages: ChatMessage[];
 }
